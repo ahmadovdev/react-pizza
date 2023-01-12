@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [React Pizza](https://github.com/ahmadovdev/react-pizza.git).
+This project created Shakhzod Akhmadov [React Pizza](https://github.com/ahmadovdev/react-pizza.git).
 
 ## Available Scripts
 
