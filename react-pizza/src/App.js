@@ -7,8 +7,9 @@ import Cart from "./pages/Cart";
 import "./scss/app.scss";
 
 function App() {
-  const [searchValue, setSearchValue] = useState("");
   
+
+  const [searchValue, setSearchValue] = useState("");
   return (
     <div className="wrapper">
       <Header searchValue={searchValue} setSearchValue={setSearchValue} />
