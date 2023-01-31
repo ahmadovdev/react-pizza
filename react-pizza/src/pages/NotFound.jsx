@@ -1,10 +1,12 @@
-import React from 'react'
-import NothingFound from '../components/NothingFound'
+import React from "react";
+import NothingFound from "../components/NothingFound";
 
 const NotFound = () => {
   return (
-    <h1><NothingFound /></h1>
-  )
-}
+    <h1>
+      <NothingFound />
+    </h1>
+  );
+};
 
-export default NotFound
+export default NotFound;

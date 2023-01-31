@@ -1,28 +1,43 @@
-import React, { useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../Redux/slices/filterSlice";
 
-export default function Sort() {
+export const sortList = [
+  { name: "популярности (DESC)", sortProperty: "rating" },
+  { name: "популярности (ASC)", sortProperty: "-rating" },
+  { name: "цене (DESC)", sortProperty: "price" },
+  { name: "цене (ASC)", sortProperty: "-price" },
+  { name: "алфавиту (DESC)", sortProperty: "title" },
+  { name: "алфавиту (ASC)", sortProperty: "-title" },
+];
+
+const Sort = () => {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
+  const sortRef = useRef();
 
   const [isVisible, setIsVisible] = useState(false);
-  const list = [
-    { name: "популярности (DESC)", sortProperty: "rating" },
-    { name: "популярности (ASC)", sortProperty: "-rating" },
-    { name: "цене (DESC)", sortProperty: "price" },
-    { name: "цене (ASC)", sortProperty: "-price" },
-    { name: "алфавиту (DESC)", sortProperty: "title" },
-    { name: "алфавиту (ASC)", sortProperty: "-title" },
-  ];
 
   const onClickListItem = (obj) => {
     dispatch(setSort(obj));
     setIsVisible(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!event.composedPath().includes(sortRef.current)) {
+        setIsVisible(false);
+        console.log("click");
+      }
+    };
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => document.body.removeEventListener('click', handleClickOutside)
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -42,7 +57,7 @@ export default function Sort() {
       {isVisible && (
         <div className="sort__popup">
           <ul>
-            {list.map((obj, idx) => (
+            {sortList.map((obj, idx) => (
               <li
                 key={idx}
                 onClick={() => onClickListItem(obj)}
@@ -56,4 +71,6 @@ export default function Sort() {
       )}
     </div>
   );
-}
+};
+
+export default Sort;
